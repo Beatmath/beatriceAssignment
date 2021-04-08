@@ -60,9 +60,7 @@ public class StepDefinition {
 		@Given("I add my {string} to create an Mialchimp account")
 		public void i_add_my_want_to_create_an_mialchimp_account(String email) {
 						
-			if (email.contains("email4")) {
-				System.out.println("Nu är jag i mailmetoden");
-				
+			if (email.contains("email4")) {	
 				driver.findElement(By.id("email")).sendKeys(" ");
 				
 			}else {
@@ -80,12 +78,10 @@ public class StepDefinition {
 					System.out.println("Skapar userid1, som är unikt");
 					
 			}else if (userName.contains("userid2")) {
-					System.out.println("Skapar userid2, som innehåller hundra tecken");
 					driver.findElement(By.id("new_username")).sendKeys(createUsername() +
 					"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa123");
 			}else if (userName.contains("userid3")) {
-				System.out.println("Skapar userid3, ett username som redan finns");
-				driver.findElement(By.id("new_username")).sendKeys("20210404160900@test.com");
+					driver.findElement(By.id("new_username")).sendKeys("20210404160900@test.com");
 			
 			}else if (userName.contains("userid4")){
 				System.out.println("Skapar userid4, ingen e-mail");
@@ -113,25 +109,22 @@ public class StepDefinition {
 			
 			try {
 					if(userName.contains("userid1")) {
-						System.out.println("userid1");
 						WebElement element = driver.findElement(By.id("login"));
 						assertEquals(verification, element.getAttribute("id"));
 						System.out.println("Your selected username is OK");
 						
 					}else if (userName.contains("userid2")) {
-						System.out.println("userid2");
 						WebElement element = driver.findElement(By.cssSelector("class[invalid-error$='100 characters long']"));
 						assertEquals(verification, element.getAttribute("class"));
 						System.out.println("Too many characters, use less then 100 characters");
 						
 					}else if (userName.contains("userid3"))	{
-						System.out.println("userid3");
 						WebElement element = driver.findElement(By.cssSelector("class[invalid-error$ = 'Spooky.']"));
 						assertEquals(verification, element.getAttribute("class"));
 						System.out.println("The username is already taken");
 					
 					}else {
-						System.out.println("userid4");
+						
 						WebElement element = driver.findElement(By.cssSelector("class[invalid-error = 'Please enter a value']"));
 						assertEquals(verification, element.getAttribute("id"));
 						System.out.println("No e-mail");
@@ -140,10 +133,11 @@ public class StepDefinition {
 				}catch (Exception e) {
 					System.out.println("You have type in wrong username or forgot e-mail");
 				}
-			}
+			driver.close();
+		}
 				
 		    
-			//driver.close();
+		
 	
 		
 		private void click(WebDriver driver, By by) {
